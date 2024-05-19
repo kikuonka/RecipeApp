@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/blob" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Инструкция пользователю"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintHorizontal_bias="0.5"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:fontFamily="@font/nunito_regular" />
+
+        <TextView
+            android:id="@+id/textViewInstruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:textSize="18sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:gravity="center"
+            android:text="Приветствуем вас в мире кулинарного творчества!
+\nОрганайзер кулинарных рецептов - ваш надежный компаньон в создании вкусных и удивительных блюд.
+Для того чтобы максимально эффективно использовать все возможности нашего приложения, предлагаем
+вам следующую инструкцию:
+
+\n\nДобавление рецептов:
+
+\n1. Нажмите на кнопку + на главном экране приложения.
+\n2. Введите название рецепта и заполните все необходимые поля.
+\n3. Опишите пошаговые инструкции для приготовления блюда.
+\n4. Не забудьте указать категорию для удобства поиска рецепта в будущем.
+\n5. Добавьте рецепт, нажав на кнопку Добавить.
+
+\n\nПоиск и фильтрация:
+
+\n1. Используйте строку поиска на главном экране для быстрого поиска нужного рецепта по названию.
+\n2. Используйте фильтры по категориям для более точного поиска и организации рецептов."  />
+
+    </LinearLayout>
+</ScrollView>

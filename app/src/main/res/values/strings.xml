@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Recipe App</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="developer_email">efr-polina2004@yandex.ru</string>
+    <string name="developer_name">Polina</string>
+    <string name="title_home">Главная</string>
+    <string name="title_dashboard">Категории</string>
+    <string name="title_notifications">Профиль</string>
+</resources>
