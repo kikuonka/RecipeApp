@@ -71,12 +71,12 @@ public class AddRecipeActivity extends AppCompatActivity {
         binding.etCookingTime.setText(recipe.getTime());
         binding.etCategory.setText(recipe.getCategory());
         binding.etCalories.setText(recipe.getCalories());
-            Glide
-                    .with(binding.getRoot().getContext())
-                    .load(recipe.getImage())
-                    .centerCrop()
-                    .placeholder(R.drawable.image_placeholder)
-                    .into(binding.imgRecipe);
+        Glide
+                .with(binding.getRoot().getContext())
+                .load(recipe.getImage())
+                .centerCrop()
+                .placeholder(R.drawable.image_placeholder)
+                .into(binding.imgRecipe);
 
         binding.btnAddRecipe.setText("Обновить");
     }
