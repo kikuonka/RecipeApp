@@ -37,6 +37,7 @@ import java.util.ArrayList;
 import java.io.ByteArrayOutputStream;
 
 public class AddRecipeActivity extends AppCompatActivity {
+    // Биндинг для связывания элементов макета с кодом
     ActivityAddRecipeBinding binding;
     private boolean isImageSelected = false;
     private ProgressDialog dialog;
@@ -48,20 +49,28 @@ public class AddRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddRecipeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        // Загрузка категорий рецептов
         loadCategories();
+
+        // Установка обработчика для кнопки добавления рецепта
         binding.btnAddRecipe.setOnClickListener(view -> {
             getData();
         });
+
+        // Установка обработчика для изображения рецепта
         binding.imgRecipe.setOnClickListener(view -> {
             pickImage();
         });
 
+        // Проверка, редактируется ли рецепт
         isEdit = getIntent().getBooleanExtra("isEdit", false);
         if (isEdit) {
             editRecipe();
         }
     }
 
+    // Метод для редактирования рецепта
     private void editRecipe() {
         Recipe recipe = (Recipe) getIntent().getSerializableExtra("recipe");
         recipeId = recipe.getId();
@@ -81,13 +90,13 @@ public class AddRecipeActivity extends AppCompatActivity {
         binding.btnAddRecipe.setText("Обновить");
     }
 
+    // Метод для загрузки категорий из базы данных
     private void loadCategories() {
         List<String> categories = new ArrayList<>();
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, categories);
         binding.etCategory.setAdapter(adapter);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Categories");
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists() && snapshot.hasChildren()) {
@@ -100,10 +109,12 @@ public class AddRecipeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                // Обработка ошибки при отмене загрузки данных
             }
         });
     }
 
+    // Метод для выбора изображения рецепта
     private void pickImage() {
         PickImageDialog.build(new PickSetup()).show(AddRecipeActivity.this).setOnPickResult(r -> {
             Log.e("ProfileFragment", "onPickResult: " + r.getUri());
@@ -113,6 +124,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         }).setOnPickCancel(() -> Toast.makeText(AddRecipeActivity.this, "Отменено", Toast.LENGTH_SHORT).show());
     }
 
+    // Метод для получения данных рецепта из полей ввода
     private void getData() {
         String recipeName = Objects.requireNonNull(binding.etRecipeName.getText()).toString();
         String recipeDescription = Objects.requireNonNull(binding.etDescription.getText()).toString();
@@ -120,6 +132,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         String recipeCategory = binding.etCategory.getText().toString();
         String calories = Objects.requireNonNull(binding.etCalories.getText()).toString();
 
+        // Проверка на заполнение полей
         if (recipeName.isEmpty()) {
             binding.etRecipeName.setError("Пожалуйста, введите название рецепта");
         } else if (recipeDescription.isEmpty()) {
@@ -133,6 +146,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         } else if (!isImageSelected) {
             Toast.makeText(this, "Пожалуйста, выберите изображение", Toast.LENGTH_SHORT).show();
         } else {
+            // Показ диалога загрузки
             dialog = new ProgressDialog(this);
             dialog.setMessage("Загружаем рецепт...");
             dialog.setCancelable(false);
@@ -142,6 +156,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         }
     }
 
+    // Метод для загрузки изображения рецепта
     private String uploadImage(Recipe recipe) {
         final String[] url = {""};
         binding.imgRecipe.setDrawingCacheEnabled(true);
@@ -174,6 +189,7 @@ public class AddRecipeActivity extends AppCompatActivity {
         return url[0];
     }
 
+    // Метод для сохранения данных рецепта в базе данных
     private void saveDataInDataBase(Recipe recipe, String url) {
         recipe.setImage(url);
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference().child("Recipes");
